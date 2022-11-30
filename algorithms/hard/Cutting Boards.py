@@ -1,3 +1,5 @@
+import os
+
 def boardCutting(cost_y, cost_x):
     
     # order horizontal + vertical slices
