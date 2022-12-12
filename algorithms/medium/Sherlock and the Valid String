@@ -1,0 +1,37 @@
+import os
+
+def isValid(s):
+    occ = dict()
+    for x in s:
+        if x in occ: occ[x] = occ[x] + 1
+        else: occ[x] = 1
+    
+    occ = list(occ.values())
+    ref = occ[0]
+    removed = False
+    if len(occ)>=2:
+        if min(occ[0],occ[1]) == max(occ[0],occ[1])+1:
+            ref = min(occ[0],occ[1])
+            removed = True
+        elif occ[0] != occ[1]:
+            return "NO"
+        
+        for i in range(2,len(occ)):
+            if occ[i] != ref and removed: return "NO"
+            if occ[i] == ref+1: removed = True
+            elif occ[i] != ref and occ[i] == 1: removed = True
+            elif occ[i] != ref: return "NO"
+    
+    return "YES"
+            
+                
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = isValid(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
